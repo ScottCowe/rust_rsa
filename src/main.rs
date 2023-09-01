@@ -1,9 +1,7 @@
 fn main() {
     let primes: Vec<u32> = find_primes_smaller_than(100);
 
-    for prime in primes {
-        println!("{}", prime)
-    }
+    println!("{}", least_common_multiple(140, 15));
 }
 
 // Uses Sieve of Eratosthenes algorithm
@@ -36,4 +34,20 @@ fn find_primes_smaller_than(n: u32) -> Vec<u32> {
     }
 
     results
+}
+
+fn greatest_common_divisor(a: u32, b: u32) -> u32 {
+    let modulus: u32 = a % b;
+
+    if modulus == 0 {
+        return b;
+    }
+
+    greatest_common_divisor(b, modulus)
+}
+
+fn least_common_multiple(a: u32, b: u32) -> u32 {
+    let gcd: u32 = greatest_common_divisor(a, b);
+
+    (a * b) / gcd
 }
