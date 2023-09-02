@@ -1,4 +1,5 @@
 use rand::Rng;
+use std::ops::Rem;
 
 fn main() {
     let primes: Vec<u32> = find_primes_smaller_than(10000);
@@ -11,6 +12,9 @@ fn main() {
     let lcm: u32 = lowest_common_multiple(prime1 - 1, prime2 - 1);
 
     let exponent: u32 = 65537;
+
+    let mult_inv: i32 = multiplicitive_inverse(17, 3120);
+    println!("{}", mult_inv);
 }
 
 // Uses Sieve of Eratosthenes algorithm
@@ -59,4 +63,49 @@ fn lowest_common_multiple(a: u32, b: u32) -> u32 {
     let gcd: u32 = greatest_common_divisor(a, b);
 
     (a * b) / gcd
+}
+
+// Solves for x and y given that: ax + by = gcd(a, b)
+fn extended_euclidian(mut a: i32, mut b: i32) -> (i32, i32, i32) {
+    if b == 0 {
+        return ((a as u32).try_into().unwrap(), 1, 0);
+    }
+
+    let mut quotient: i32 = a / b;
+    let mut remainder: i32 = a % b;
+    let mut a1: i32 = 1;
+    let mut a2: i32 = 0;
+    let mut a3: i32 = a1 - quotient * a2;
+    let mut b1: i32 = 0;
+    let mut b2: i32 = 1;
+    let mut b3: i32 = b1 - quotient * b2;
+
+    while remainder != 0 {
+        a = b;
+        b = remainder;
+        quotient = a / b;
+        remainder = a % b;
+        a1 = a2;
+        a2 = a3;
+        a3 = a1 - quotient * a2;
+        b1 = b2;
+        b2 = b3;
+        b3 = b1 - quotient * b2;
+    }
+
+    (b, a2, b2)
+}
+
+fn modulus(a: i32, b: i32) -> i32 {
+    ((a % b) + b) % b
+}
+
+fn multiplicitive_inverse(a: i32, n: i32) -> i32 {
+    let (b, a2, b2): (i32, i32, i32) = extended_euclidian(n, a);
+
+    if b != 1 {
+        panic!("b and n are not co-primes");
+    }
+
+    modulus(b2, n)
 }
