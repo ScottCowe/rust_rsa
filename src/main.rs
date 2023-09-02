@@ -1,7 +1,16 @@
-fn main() {
-    let primes: Vec<u32> = find_primes_smaller_than(100);
+use rand::Rng;
 
-    println!("{}", least_common_multiple(140, 15));
+fn main() {
+    let primes: Vec<u32> = find_primes_smaller_than(10000);
+
+    let prime1: &u32 = &primes[rand::thread_rng().gen_range(0..=primes.len())];
+    let prime2: &u32 = &primes[rand::thread_rng().gen_range(0..=primes.len())];
+
+    let primes_multiplied: u32 = prime1 * prime2;
+
+    let lcm: u32 = lowest_common_multiple(prime1 - 1, prime2 - 1);
+
+    let exponent: u32 = 65537;
 }
 
 // Uses Sieve of Eratosthenes algorithm
@@ -46,7 +55,7 @@ fn greatest_common_divisor(a: u32, b: u32) -> u32 {
     greatest_common_divisor(b, modulus)
 }
 
-fn least_common_multiple(a: u32, b: u32) -> u32 {
+fn lowest_common_multiple(a: u32, b: u32) -> u32 {
     let gcd: u32 = greatest_common_divisor(a, b);
 
     (a * b) / gcd
