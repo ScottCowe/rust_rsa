@@ -1,12 +1,12 @@
 use rand::Rng;
 use std::io;
 
+pub mod arithmetic;
 pub mod key;
 pub mod primes;
-pub mod arithmetic;
 
 fn main() {
-    let primes: Vec<u64> = find_primes_smaller_than(1000);
+    let primes: Vec<u64> = crate::primes::find_primes_smaller_than(1000);
 }
 
 /*fn main() {

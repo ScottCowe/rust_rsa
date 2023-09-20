@@ -1,5 +1,5 @@
 // Uses Sieve of Eratosthenes algorithm
-pub fn find_primes_smaller_than(number: u64) -> Vec<u64> {
+pub fn find_primes_smaller_than(n: u64) -> Vec<u64> {
     let mut bool_results: Vec<bool> = vec![true; n as usize + 1];
     let root_n: u64 = (n as f64).sqrt() as u64;
 
@@ -29,3 +29,4 @@ pub fn find_primes_smaller_than(number: u64) -> Vec<u64> {
 
     results
 }
+
