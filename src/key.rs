@@ -1,22 +1,26 @@
+use crate::arithmetic::modular_exponent;
+
 pub struct PublicKey {
-    carmicheal_totient: i128,
-    exponent: i128,
+    pub primes_product: u64,
+    pub exponent: u64,
 }
 
 impl PublicKey {
-    fn encrypt_integer(to_encrypt: i128) -> i128 {
-        0
+    pub fn encrypt_integer(&self, to_encrypt: u64) -> u64 {
+        let result: u64 = modular_exponent(to_encrypt, self.exponent, self.primes_product);
+        result
     }
 }
 
 pub struct PrivateKey {
-    prime_product: i128,
-    exponent: i128,
+    pub primes_product: u64,
+    pub multiplicative_inverse: u64,
 }
 
 impl PrivateKey {
-    fn decrypt_integer(to_decrypt: i128) -> i128 {
-        0
+    pub fn decrypt_integer(&self, to_decrypt: u64) -> u64 {
+        let result: u64 =
+            modular_exponent(to_decrypt, self.multiplicative_inverse, self.primes_product);
+        result
     }
 }
-

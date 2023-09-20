@@ -49,12 +49,27 @@ pub fn extended_euclidian(mut a: i64, mut b: i64) -> (i64, i64, i64) {
     (b, a2, b2)
 }
 
-pub fn multiplicitive_inverse(a: i64, n: i64) -> i64 {
+pub fn multiplicitive_inverse(a: i64, n: i64) -> u64 {
     let (gcd, a, b): (i64, i64, i64) = extended_euclidian(n, a);
 
     if gcd != 1 {
         panic!("b and n are not co-primes");
     }
 
-    modulus(b, n)
+    modulus(b, n) as u64
 }
+
+// Calculates the result of a^b mod c
+// https://rustp.org/number-theory/modular-exponentiation/
+// Inefficent algorithm used for testing purposes
+pub fn modular_exponent(a: u64, b: u64, c: u64) -> u64 {
+    let mut answer: u64 = 1;
+
+    for _ in 0..b {
+        answer *= a;
+        answer %= c;
+    }
+
+    return answer;
+}
+
