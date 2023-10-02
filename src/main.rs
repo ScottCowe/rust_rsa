@@ -10,7 +10,7 @@ pub mod key;
 pub mod primes;
 
 fn main() {
-    let prime_numbers: Vec<u64> = find_primes_smaller_than(1000);
+    let prime_numbers: Vec<u64> = find_primes_smaller_than(1000000);
     let (public_key, private_key): (PublicKey, PrivateKey) = generate_keypair(prime_numbers);
 
     let message: u64 = 3234; // Loops back around at product of primes + 1
