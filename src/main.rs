@@ -24,8 +24,8 @@ fn main() {
 }
 
 fn generate_keypair(prime_numbers: Vec<u64>) -> (PublicKey, PrivateKey) {
-    let prime1: u64 = &primes[rand::thread_rng().gen_range(0..=prime_numbers.len())];
-    let prime2: u64 = &primes[rand::thread_rng().gen_range(0..=prime_numbers.len())];
+    let prime1: u64 = &prime_numbers[rand::thread_rng().gen_range(0..=prime_numbers.len())];
+    let prime2: u64 = &prime_numbers[rand::thread_rng().gen_range(0..=prime_numbers.len())];
 
     let primes_product: u64 = prime1 * prime2;
 
